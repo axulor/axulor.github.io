@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Yichao Wang · Collective Intelligence, Game Theory &amp; Multi-Agent Learning</title>
+<meta name="description" content="Yichao Wang, Ph.D. candidate working on collective intelligence, game theory, and multi-agent learning." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F7F9;
+    --ink:#14181E;
+    --ink-soft:#535C68;
+    --hair:#E2E5EA;
+    --accent:#E14B33;
+    --accent-soft:rgba(225,75,51,.12);
+    --slate:#9CA8B6;
+    --maxw:780px;
+    --f-display:"Space Grotesk",system-ui,sans-serif;
+    --f-body:"Spectral",Georgia,serif;
+    --f-mono:"JetBrains Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:var(--f-body);font-size:17px;line-height:1.62;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  a{color:inherit}
+
+  /* ---------- header ---------- */
+  header{padding:64px 0 8px}
+  .eyebrow{
+    font-family:var(--f-mono);font-size:12.5px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--ink-soft);margin:0 0 16px;
+  }
+  h1{
+    font-family:var(--f-display);font-weight:600;
+    font-size:clamp(2.3rem,6.2vw,3.2rem);line-height:1.02;
+    letter-spacing:-.02em;margin:0 0 10px;
+  }
+  .role{font-family:var(--f-body);font-style:italic;font-size:1.12rem;color:var(--ink-soft);margin:0;max-width:50ch}
+  .contact{
+    display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:18px;
+    font-family:var(--f-mono);font-size:13px;letter-spacing:.01em;
+  }
+  .contact a{
+    color:var(--ink-soft);text-decoration:none;
+    border-bottom:1px solid transparent;padding-bottom:1px;
+    transition:color .15s ease,border-color .15s ease;
+  }
+  .contact a:hover{color:var(--accent);border-color:var(--accent)}
+  .contact a.cv{color:var(--accent);border-color:var(--accent-soft)}
+
+  /* ---------- view toggle ---------- */
+  .toggle{display:inline-flex;gap:4px;margin:26px 0 0;padding:4px;
+    background:#fff;border:1px solid var(--hair);border-radius:999px}
+  .seg{font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--ink-soft);background:transparent;border:0;border-radius:999px;
+    padding:8px 16px;cursor:pointer;transition:background .15s ease,color .15s ease}
+  .seg:hover{color:var(--ink)}
+  .seg.on{background:var(--accent);color:#fff}
+  .seg:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+  /* ---------- sections ---------- */
+  section{padding:24px 0;border-top:1px solid var(--hair)}
+  section:first-child{border-top:0}
+  .sec-label{
+    font-family:var(--f-mono);font-size:12px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--accent);margin:0 0 16px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .sec-label:before{content:"";width:7px;height:7px;border-radius:50%;
+    background:var(--accent);box-shadow:0 0 0 0 var(--accent-soft);animation:beat 3s ease-in-out infinite}
+  @keyframes beat{0%,100%{box-shadow:0 0 0 0 var(--accent-soft)}50%{box-shadow:0 0 0 6px rgba(225,75,51,0)}}
+
+  .lede{font-size:1.08rem;line-height:1.66;margin:0 0 14px;max-width:64ch}
+  .lede:last-child{margin-bottom:0}
+  .lede .key{font-weight:600}
+  p.body{font-size:1.0rem;line-height:1.6;margin:0 0 12px;max-width:64ch}
+  p.body:last-child{margin-bottom:0}
+
+  /* research interest areas */
+  .area{display:grid;grid-template-columns:150px 1fr;gap:6px 24px;margin:0 0 22px}
+  .area:last-child{margin-bottom:0}
+  .area .label{font-family:var(--f-display);font-weight:500;font-size:1.04rem;color:var(--ink);padding-top:1px}
+  .area .desc{margin:0;font-size:.99rem;line-height:1.55;color:var(--ink-soft)}
+  .area .desc b{color:var(--ink);font-weight:600}
+  .sub{margin:8px 0 0;padding:0;list-style:none}
+  .sub li{font-size:.97rem;line-height:1.5;margin:0 0 5px;padding-left:18px;position:relative;color:var(--ink-soft)}
+  .sub li:before{content:"›";position:absolute;left:0;color:var(--accent);font-family:var(--f-mono)}
+  .sub li b{color:var(--ink);font-weight:600}
+
+  /* entries */
+  .entry{display:grid;grid-template-columns:128px 1fr;gap:8px 24px;margin:0 0 22px}
+  .entry:last-child{margin-bottom:0}
+  .entry .meta{font-family:var(--f-mono);font-size:12.5px;color:var(--ink-soft);
+    line-height:1.5;padding-top:4px;letter-spacing:.01em}
+  .entry .body h3{font-family:var(--f-display);font-weight:500;font-size:1.04rem;
+    letter-spacing:-.005em;margin:0 0 3px;line-height:1.3}
+  .entry .body .where{color:var(--ink-soft);margin:0 0 6px;font-size:.96rem}
+  .entry .body p{margin:0;font-size:.98rem;line-height:1.55}
+  .entry .body p+p{margin-top:6px}
+
+  /* publications */
+  .pub{display:grid;grid-template-columns:30px 1fr;gap:0 16px;margin:0 0 16px}
+  .pub:last-child{margin-bottom:0}
+  .pub .n{font-family:var(--f-mono);font-size:13px;color:var(--accent);padding-top:2px}
+  .pub p{margin:0;font-size:.98rem;line-height:1.55}
+  .pub .venue{font-style:italic}
+  .pub .tag{display:inline-block;font-family:var(--f-mono);font-size:11px;
+    letter-spacing:.06em;text-transform:uppercase;color:var(--accent);
+    background:var(--accent-soft);border-radius:4px;padding:1px 7px;margin-left:2px;vertical-align:1px}
+
+  /* skills + languages */
+  .skills{display:grid;grid-template-columns:150px 1fr;gap:10px 24px;margin:0}
+  .skills dt{font-family:var(--f-mono);font-size:12.5px;color:var(--ink-soft);
+    text-transform:uppercase;letter-spacing:.08em;padding-top:2px}
+  .skills dd{margin:0;font-size:.98rem;line-height:1.5}
+
+  .awards{margin:0;padding:0;list-style:none}
+  .awards li{font-size:.98rem;line-height:1.5;margin:0 0 7px;padding-left:18px;position:relative}
+  .awards li:before{content:"›";position:absolute;left:0;color:var(--accent);font-family:var(--f-mono)}
+
+  .chips{display:flex;flex-wrap:wrap;gap:9px;margin:14px 0 0}
+  .chip{font-family:var(--f-mono);font-size:12.5px;letter-spacing:.02em;
+    color:var(--ink);border:1px solid var(--hair);background:#fff;
+    border-radius:999px;padding:6px 13px;transition:transform .15s ease,border-color .15s ease}
+  .chip:hover{transform:translateY(-2px);border-color:var(--accent)}
+  .chip--lead{border-color:var(--accent);color:var(--accent)}
+
+  /* beyond-research / personal */
+  .person{display:grid;grid-template-columns:188px 1fr;gap:30px;align-items:start}
+  .portrait{
+    width:188px;height:226px;object-fit:cover;object-position:center top;
+    border-radius:16px;border:1px solid var(--hair);
+    box-shadow:0 6px 22px rgba(20,24,30,.10);display:block;
+  }
+
+  footer{padding:28px 0 60px;border-top:1px solid var(--hair);
+    font-family:var(--f-mono);font-size:12px;color:var(--ink-soft)}
+  footer a{color:var(--ink-soft);text-decoration:none}
+  footer a:hover{color:var(--accent)}
+
+  /* scroll reveal */
+  .js .reveal{opacity:0;transform:translateY(12px);transition:opacity .55s ease, transform .55s ease}
+  .js .reveal.in{opacity:1;transform:none}
+
+  @media (max-width:620px){
+    body{font-size:16px}
+    header{padding:44px 0 6px}
+    .area{grid-template-columns:1fr;gap:3px}
+    .entry{grid-template-columns:1fr;gap:2px}
+    .entry .meta{padding-top:0;margin-bottom:2px}
+    .skills{grid-template-columns:1fr;gap:2px 0}
+    .skills dt{margin-top:8px}
+    .person{grid-template-columns:1fr;gap:18px}
+    .portrait{order:-1;width:150px;height:180px}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    .sec-label:before{animation:none}
+    .js .reveal{opacity:1;transform:none;transition:none}
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+
+    <header>
+      <p class="eyebrow">Ph.D. Candidate · Kyushu University</p>
+      <h1>Yichao Wang</h1>
+      <p class="role">Working on collective intelligence, game theory, and multi-agent learning: how intelligent collective behavior arises from simple, adaptive agents, in nature and in machines.</p>
+      <nav class="contact" aria-label="Contact and links">
+        <a href="mailto:wzone85733@gmail.com">wzone85733@gmail.com</a>
+        <a href="https://github.com/axulor">github.com/axulor</a>
+        <a href="https://orcid.org/0000-0003-2247-0516">ORCID</a>
+        <a class="cv" href="cv.html">Academic&nbsp;CV (PDF)</a>
+      </nav>
+
+      <div class="toggle" role="group" aria-label="Switch view">
+        <button class="seg on" data-view="research" aria-pressed="true">Research</button>
+        <button class="seg" data-view="beyond" aria-pressed="false">Beyond Research</button>
+      </div>
+    </header>
+
+    <!-- ===================== RESEARCH VIEW ===================== -->
+    <main id="view-research">
+
+      <section class="reveal" aria-label="Research interests">
+        <p class="sec-label">Research Interests</p>
+        <p class="lede" style="margin-bottom:22px">
+          The throughline of my work is a single question: how does intelligent
+          <span class="key">collective behavior</span> arise from many simple, adaptive agents,
+          in nature and in machines. Concretely, I work across three areas.
+        </p>
+
+        <div class="area">
+          <div class="label">Collective intelligence</div>
+          <div class="desc">
+            How robust, adaptive, global behavior emerges from large populations of simple agents
+            following local rules. I think of this as evolutionary computation and open-ended
+            adaptation in populations of agents, and it is the reason nature-inspired approaches to
+            AI interest me.
+          </div>
+        </div>
+
+        <div class="area">
+          <div class="label">Game theory</div>
+          <div class="desc">
+            I am drawn to the <b>dynamic</b> side of game theory more than its static equilibria.
+            <ul class="sub">
+              <li><b>Learning in games:</b> how agents learn, adapt, and converge, or fail to, through repeated interaction.</li>
+              <li><b>Evolution of cooperation:</b> when and why cooperation arises and persists in social dilemmas.</li>
+              <li><b>Equilibrium computation:</b> solving games, especially imperfect-information games, via counterfactual regret minimization and related methods.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="area">
+          <div class="label">Multi-agent systems &amp; RL</div>
+          <div class="desc">
+            The bridge from game-theoretic solution concepts to scalable learning algorithms:
+            multi-agent reinforcement learning, and the deep methods that let these ideas run at scale.
+          </div>
+        </div>
+      </section>
+
+      <section class="reveal" aria-label="Education">
+        <p class="sec-label">Education</p>
+        <div class="entry">
+          <div class="meta">2024 – 2027<br>(expected)</div>
+          <div class="body">
+            <h3>Ph.D., Engineering Sciences</h3>
+            <p class="where">Kyushu University, Interdisciplinary Graduate School of Engineering Sciences. Supervisor: <a href="https://scholar.google.com/citations?user=u7BZCXcAAAAJ" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">Prof. Jun Tanimoto</a></p>
+            <p>Evolutionary game theory and learning dynamics on complex networks; the emergence and stability of cooperation in multi-agent, spatial social-dilemma systems.</p>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="meta">2021 – 2024</div>
+          <div class="body">
+            <h3>M.Sc., Systems Science</h3>
+            <p class="where">Wuhan University of Science and Technology, School of Science</p>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="meta">2016 – 2020</div>
+          <div class="body">
+            <h3>B.Sc., Information and Computing Science</h3>
+            <p class="where">North China University of Technology, School of Science</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="reveal" aria-label="Publications">
+        <p class="sec-label">Publications</p>
+        <div class="pub">
+          <div class="n">[1]</div>
+          <p>
+            <b>Yichao Wang</b>, Jun Tanimoto.
+            Dynamics of counterfactual attribution regret minimization in spatial public goods games.
+            <span class="venue">Chaos: An Interdisciplinary Journal of Nonlinear Science</span>,
+            35(12), 123122, 2025. doi:10.1063/5.0302815.
+          </p>
+        </div>
+        <div class="pub">
+          <div class="n">[2]</div>
+          <p>
+            <b>Yichao Wang</b>, Xinyi Yu, Akhil Srivastav, Jun Tanimoto.
+            Recursion Depth of Counterfactual Reasoning Shapes Cooperation in Spatial Prisoner's Dilemma Games.
+            <span class="venue">Manuscript in preparation</span> (target: PNAS), 2026.
+            <span class="tag">In prep</span>
+          </p>
+        </div>
+      </section>
+
+      <section class="reveal" aria-label="Selected research">
+        <p class="sec-label">Selected Research</p>
+        <div class="entry">
+          <div class="meta">2026 –<br>ongoing</div>
+          <div class="body">
+            <h3>Deep counterfactual regret minimization for imperfect-information games</h3>
+            <p>An ongoing collaborative project on model-free deep CFR with last-iterate convergence theory, built on custom game engines for Kuhn poker, Leduc poker, and Liar's Dice. Implemented in PyTorch, with early experiments reproducing the predicted dynamics across tabular and sampling regimes.</p>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="meta">2024 – 2026</div>
+          <div class="body">
+            <h3>Regret-driven learning and the emergence of cooperation on networks</h3>
+            <p>Large-scale agent-based studies of how counterfactual reasoning, regret, and network structure shape whether cooperation arises and persists in spatial social-dilemma games. Built high-performance Monte-Carlo simulators in Python and C++. Outcomes: a first-author paper in <i>Chaos</i> and a manuscript in preparation for <i>PNAS</i>.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="reveal" aria-label="Technical skills">
+        <p class="sec-label">Technical Skills</p>
+        <dl class="skills">
+          <dt>Languages</dt>
+          <dd>Python (primary), C++, MATLAB, R, LaTeX</dd>
+          <dt>ML / Compute</dt>
+          <dd>PyTorch, NumPy, SciPy; large-scale numerical experiments and HPC workflows</dd>
+          <dt>Modeling</dt>
+          <dd>Agent-based and Monte-Carlo simulation, complex networks (networkx), evolutionary computation, multi-agent reinforcement learning</dd>
+        </dl>
+      </section>
+
+      <section class="reveal" aria-label="Awards">
+        <p class="sec-label">Awards and Honors</p>
+        <ul class="awards">
+          <li>National Third Prize, "Huawei Cup" China Post-Graduate Mathematical Contest in Modeling, 2021</li>
+          <li>Beijing First Prize, National College Students Mathematics Competition (mathematics major group), 2019</li>
+          <li>Beijing First Prize, China Undergraduate Mathematical Contest in Modeling, 2018</li>
+        </ul>
+      </section>
+
+      <section class="reveal" aria-label="Outreach">
+        <p class="sec-label">Outreach</p>
+        <p class="body" style="max-width:64ch">
+          Author of <b>GRIS Lab (Game-theoretic Reasoning and Intelligent Systems Laboratory)</b>,
+          my personal WeChat public account (~1,000 subscribers, 30+ articles), where I write
+          in-depth technical articles for a Chinese-speaking audience on game theory, complex
+          networks, dynamical systems, and reinforcement learning.
+        </p>
+      </section>
+
+      <section class="reveal" aria-label="Languages">
+        <p class="sec-label">Languages</p>
+        <dl class="skills">
+          <dt>English</dt><dd>Fluent reading and academic writing; conversational speaking</dd>
+          <dt>Japanese</dt><dd>JLPT N2; conversational, currently living in Japan</dd>
+          <dt>Chinese</dt><dd>Native</dd>
+        </dl>
+      </section>
+
+    </main>
+
+    <!-- ===================== BEYOND-RESEARCH VIEW ===================== -->
+    <main id="view-beyond" hidden>
+
+      <section class="reveal" aria-label="Beyond research" style="border-top:0">
+        <p class="sec-label">Beyond Research</p>
+        <div class="person">
+          <img class="portrait" src="portrait.jpg" alt="Portrait of Yichao Wang" />
+          <div>
+            <p class="lede">
+              Originally from Chengdu, in Sichuan, China, and currently based in Fukuoka, Japan.
+              Outside the simulations and the math, here is the rest of me.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="reveal" aria-label="Karate">
+        <p class="sec-label">Karate</p>
+        <p class="lede" style="font-size:1.05rem">
+          I practice <b>karate</b> and currently hold a fifth-kyū purple belt, training regularly.
+          It is a steady counterweight to a day spent in front of a screen, and a quiet lesson in
+          patience and incremental progress, the same discipline that long research projects ask for.
+        </p>
+      </section>
+
+      <section class="reveal" aria-label="Writing">
+        <p class="sec-label">Writing</p>
+        <p class="lede" style="font-size:1.05rem">
+          I enjoy explaining hard ideas plainly. That is why I run GRIS Lab, where I write for a
+          general technical audience about game theory, dynamics, and reinforcement learning. Teaching
+          an idea to others is how I find out whether I truly understand it myself.
+        </p>
+      </section>
+
+    </main>
+
+    <footer>
+      Yichao Wang · Fukuoka, Japan · <a href="mailto:wzone85733@gmail.com">wzone85733@gmail.com</a> · <a href="https://github.com/axulor">github.com/axulor</a>
+    </footer>
+
+  </div>
+
+  <script>
+    document.documentElement.classList.add('js');
+    (function(){
+      var btns = document.querySelectorAll('.seg');
+      var views = {
+        research: document.getElementById('view-research'),
+        beyond: document.getElementById('view-beyond')
+      };
+      function revealWithin(el){
+        el.querySelectorAll('.reveal').forEach(function(s){ s.classList.add('in'); });
+      }
+      btns.forEach(function(b){
+        b.addEventListener('click', function(){
+          var v = b.dataset.view;
+          btns.forEach(function(x){
+            var on = (x === b);
+            x.classList.toggle('on', on);
+            x.setAttribute('aria-pressed', on ? 'true' : 'false');
+          });
+          Object.keys(views).forEach(function(k){ views[k].hidden = (k !== v); });
+          revealWithin(views[v]);
+          window.scrollTo({top:0,behavior:'smooth'});
+        });
+      });
+
+      var els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) {
+        els.forEach(function(e){ e.classList.add('in'); });
+        return;
+      }
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(en){
+          if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      els.forEach(function(e){ io.observe(e); });
+    })();
+  </script>
+</body>
+</html>
